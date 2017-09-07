@@ -31,14 +31,13 @@ module.exports.insertDoc = db => {
     }).catch(onerror);
 };
 
-module.exports.getDoc = db => {
-    return new Promise((res, rej) => {
-        let cursor = db.collection('docs').find();
-        cursor.forEach(entry => {
-            let output = JSON.stringify(entry, null, 4);
-            console.log(output);
-        })
-    }).catch(onerror);
+module.exports.getDoc = async db => {
+    try {
+        let arr = await db.collection('docs').find({}).toArray();
+        return arr;
+    } catch (e) {
+        onerror(e);
+    }
 };
 
 module.exports.updateDoc = db => {
