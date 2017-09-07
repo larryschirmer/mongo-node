@@ -11,21 +11,16 @@ module.exports.getDB = addr => {
         // Use connect method to connect to the server
         MongoClient.connect(url, function (err, db) {
             assert.equal(null, err);
-            console.log('Connected successfully to server');
+            // console.log('Connected successfully to server');
             res(db);
         })
     }).catch(onerror);
 }
 
-var schema = {
-    key: 'value',
-};
-
-module.exports.insertDoc = db => {
+module.exports.insertDoc = (db, schema) => {
     return new Promise((res, rej) => {
         db.collection('docs').insertOne(schema, (err, result) => {
             assert.equal(err, null);
-            console.log("Inserted a document into the docs collection.");
             res('done');
         });
     }).catch(onerror);
@@ -43,9 +38,9 @@ module.exports.getDoc = async db => {
 module.exports.updateDoc = db => {
     return new Promise((res, rej) => {
         let cursor = db.collection('docs').updateOne(
-            { "key": "value (New)" },
+            { "key": "value" },
             {
-                $set: { "key": "value" }
+                $set: { "key": "value (New)" }
             }, (err, result) => {
                 res('value changed');
             })
