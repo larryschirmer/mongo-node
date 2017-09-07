@@ -52,3 +52,13 @@ module.exports.updateDoc = db => {
             })
     }).catch(onerror);
 };
+
+module.exports.removeDoc = db => {
+    return new Promise((res, rej) => {
+        db.collection('docs').deleteOne(
+            { "key": "value" },
+            (err, result) => {
+                res('value changed');
+            })
+    })
+};

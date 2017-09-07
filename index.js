@@ -1,7 +1,7 @@
 // docker run --name mongo-docker -it -p 2000:27017 -d mongo
 // docker exec -t -i mongo-docker /bin/bash
 
-let { getDB, insertDoc, getDoc, updateDoc } = require('./ioFunctions');
+let { getDB, insertDoc, getDoc, updateDoc, removeDoc } = require('./ioFunctions');
 let { onerror } = require('./errorFunctions');
 
 let MongoClient = require('mongodb').MongoClient,
@@ -15,8 +15,13 @@ co(function* () {
   let db = yield getDB(dbURL);
   // let insertResponse = yield insertDoc(db);
   // console.log(insertResponse);
+
   getDoc(db);
+
   // let updateResponse = yield updateDoc(db);
   // console.log(updateResponse);
+
+  // let removeResponse = yield removeDoc(db);
+  // console.log(removeResponse);
   db.close();
 }).catch(onerror);
