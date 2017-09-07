@@ -1,9 +1,7 @@
 let { getDB, insertDoc, getDoc, updateDoc, removeDoc } = require('./ioFunctions');
 let { onerror } = require('./errorFunctions');
 
-let dbURL = 'mongodb://0.0.0.0:2000/database';
-
-module.exports.get = async app => {
+module.exports.get = async (app, dbURL) => {
     app.get('/', async (req, res) => {
         try {
             let db = await getDB(dbURL);
@@ -20,7 +18,7 @@ var schema = {
     key: 'value',
 };
 
-module.exports.create = async app => {
+module.exports.create = async (app, dbURL) => {
     app.post('/', async (req, res) => {
         try {
             let db = await getDB(dbURL);
@@ -33,7 +31,7 @@ module.exports.create = async app => {
     });
 }
 
-module.exports.remove = async app => {
+module.exports.remove = async (app, dbURL) => {
     app.delete('/', async (req, res) => {
         try {
             let db = await getDB(dbURL);
@@ -46,7 +44,7 @@ module.exports.remove = async app => {
     });
 }
 
-module.exports.update = async app => {
+module.exports.update = async (app, dbURL) => {
     app.patch('/', async (req, res) => {
         try {
             let db = await getDB(dbURL);
