@@ -13,6 +13,8 @@
   "dependencies": {
     "assert": "^1.4.1",
     "express": "^4.15.4",
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.6.3",
     "mongodb": "^2.2.31"
   }
 }
